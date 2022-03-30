@@ -1,9 +1,11 @@
 export interface IElectronAPI {
-  update: (count: number) => void;
+	update: (count: number) => void;
+	readTextFile: (filePath: string) => Promise<string>;
+	writeTextFile: (filePath: string, content: string) => Promise<void>;
 }
 
 declare global {
-  interface Window {
-    myAPI: IElectronAPI;
-  }
+	interface Window {
+		mainProcessAPI: IElectronAPI;
+	}
 }

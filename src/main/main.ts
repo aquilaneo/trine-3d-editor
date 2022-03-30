@@ -19,6 +19,7 @@ const createWindow = () => {
 			preload: path.join (__dirname, 'preload.js'),
 		},
 	});
+	mainWindow.webContents.openDevTools ();
 
 	ipcMain.on ('update-title', (_e, arg) => {
 		mainWindow.setTitle (`Electron React TypeScript: ${arg}`);
