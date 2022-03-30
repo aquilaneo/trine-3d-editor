@@ -10,7 +10,8 @@
   "ts-node": {
     "compilerOptions": {
       "target": "ESNext",
-      "module": "CommonJS"
+      "module": "CommonJS",
+      "noImplicitAny": true
     }
   }
 }
