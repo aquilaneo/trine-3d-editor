@@ -45,3 +45,10 @@ ipcMain.handle ("write-text-file", async (event, filePath: string, content: stri
 	await fs.promises.writeFile (filePath, content);
 });
 // ==========================================
+
+
+// ========== ファイル存在確認 ==========
+ipcMain.handle ("exists", (event, filePath: string) => {
+	return fs.existsSync (filePath);
+});
+// ===================================
