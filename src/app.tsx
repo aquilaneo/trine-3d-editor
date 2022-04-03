@@ -4,7 +4,7 @@ import * as Data from "./data";
 
 export const App = () => {
 	const settings = new Data.EditorSettings ();
-	settings.toJson ("./TEST.json");
+	settings.toJson ();
 
 	return (
 		<div>
