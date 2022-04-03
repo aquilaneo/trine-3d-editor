@@ -44,6 +44,11 @@
       ":.html",
       "dist/**/*"
     ],
+    "win": {
+      "target": [
+        "zip"
+      ]
+    },
     "mac": {
       "target": [
         "dmg"
