@@ -11,7 +11,7 @@ export class EditorSettings {
 			editorVersion: editorVersion,
 			fileType: "trineEditorSettings",
 			recentProjects: this.recentProjects
-		}
+		};
 
 		await window.mainProcessAPI.writeTextFile (EditorSettings.settingsFilePath, JSON.stringify (object));
 	}
@@ -61,7 +61,7 @@ export class Project {
 			fileType: "trineProject",
 			projectName: this.projectName,
 			initialEditorVersion: this._initialEditorVersion
-		}
+		};
 
 		await window.mainProcessAPI.writeTextFile (filePath, JSON.stringify (object));
 	}
@@ -77,3 +77,37 @@ export class Project {
 }
 
 // ================================
+
+
+// ========== マップ ==========
+export class Map {
+	private _mapName: string;
+
+	// コンストラクタ
+	public constructor (mapName: string) {
+		this._mapName = mapName;
+	}
+
+	public get mapName () {
+		return this._mapName;
+	}
+
+	public set mapName (mapName: string) {
+		this._mapName = mapName;
+	}
+
+	public toJson () {
+		const object = {
+			mapName: this._mapName
+		}
+
+		return object;
+	}
+
+	public static fromJson (object: {mapName: string}) {
+		const map = new Map(object.mapName);
+		return map;
+	}
+}
+
+// ===========================
