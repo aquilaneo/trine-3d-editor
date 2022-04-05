@@ -7,7 +7,7 @@ export class EditorSettings {
 
 	// 設定ファイル書き込み
 	public async toJson () {
-		const object = {
+		const object: EditorSettingsJson = {
 			editorVersion: editorVersion,
 			fileType: "trineEditorSettings",
 			recentProjects: this.recentProjects
@@ -18,12 +18,18 @@ export class EditorSettings {
 
 	// 設定ファイル読み込み
 	public static async fromJSON () {
-		const object = JSON.parse (await window.mainProcessAPI.readTextFile (EditorSettings.settingsFilePath));
+		const object: EditorSettingsJson = JSON.parse (await window.mainProcessAPI.readTextFile (EditorSettings.settingsFilePath));
 		const editorSettings = new EditorSettings ();
 		editorSettings.recentProjects = object.recentProjects;
 		return editorSettings;
 	}
 }
+
+export type EditorSettingsJson = {
+	editorVersion: string,
+	fileType: string,
+	recentProjects: { projectName: string, projectDirectory: string }[];
+};
 
 // ================================
 
@@ -56,7 +62,7 @@ export class Project {
 
 	// プロジェクトファイル書き込み
 	public async toJson (filePath: string) {
-		const object = {
+		const object: ProjectJson = {
 			editorVersion: editorVersion,
 			fileType: "trineProject",
 			projectName: this.projectName,
@@ -68,13 +74,20 @@ export class Project {
 
 	// プロジェクトファイル読み込み
 	public static async fromJson (filePath: string) {
-		const object = JSON.parse (await window.mainProcessAPI.readTextFile (filePath));
+		const object: ProjectJson = JSON.parse (await window.mainProcessAPI.readTextFile (filePath));
 		const project = new Project ();
 		project.projectName = object.projectName;
 		project._initialEditorVersion = object.initialEditorVersion;
 		return project;
 	}
 }
+
+export type ProjectJson = {
+	editorVersion: string,
+	fileType: string,
+	projectName: string,
+	initialEditorVersion: string;
+};
 
 // ================================
 
@@ -97,17 +110,21 @@ export class Map {
 	}
 
 	public toJson () {
-		const object = {
+		const object: MapJson = {
 			mapName: this._mapName
 		}
 
 		return object;
 	}
 
-	public static fromJson (object: {mapName: string}) {
-		const map = new Map(object.mapName);
+	public static fromJson (object: MapJson) {
+		const map = new Map (object.mapName);
 		return map;
 	}
+}
+
+export type MapJson = {
+	mapName: string;
 }
 
 // ===========================
